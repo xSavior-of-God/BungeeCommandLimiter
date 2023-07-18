@@ -1,0 +1,3 @@
+time: 3000
+max: 10
+kick-message: "&cYou are sending too many commands and messages!"

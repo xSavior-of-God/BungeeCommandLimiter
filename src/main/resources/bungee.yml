@@ -1,0 +1,14 @@
+name: BungeeCommandLimiter
+version: maven-version-number
+description: "Prevent your server from crashing due to repeated command or message spam."
+author: 'xSavior_of_God'
+main: com.xSavior_of_God.BungeeCommandLimiter._bungeecord.MainBungeecord
+commands:
+  BungeeCommandLimiter:
+    description: Reload command
+    aliases: [ BCL ]
+    usage: /BungeeCommandLimiter
+permissions:
+  BungeeCommandLimiter.reload:
+    description:
+    default: op

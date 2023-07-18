@@ -1,0 +1,10 @@
+{
+  "id": "bungeecommandlimiter",
+  "name": "BungeeCommandLimiter",
+  "version": "maven-version-number",
+  "description": "Prevent your server from crashing due to repeated command or message spam.",
+  "authors": [
+    "xSavior_of_God"
+  ],
+  "main": "com.xSavior_of_God.BungeeCommandLimiter._velocity.MainVelocity"
+}
