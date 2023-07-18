@@ -3,6 +3,7 @@ package com.xSavior_of_God.BungeeCommandLimiter._bungeecord;
 import com.xSavior_of_God.BungeeCommandLimiter._bungeecord.commands.ReloadCommand;
 import com.xSavior_of_God.BungeeCommandLimiter._bungeecord.events.ChatEvent;
 import com.xSavior_of_God.BungeeCommandLimiter._bungeecord.events.PlayerDisconnectEvent;
+import com.xSavior_of_God.BungeeCommandLimiter._bungeecord.metrics.Metrics;
 import com.xSavior_of_God.BungeeCommandLimiter.utils.Limiter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.plugin.Plugin;
@@ -25,6 +26,7 @@ public class MainBungeecord extends Plugin {
     public void onEnable() {
         instance = this;
         log(Level.INFO, "&6Loading BungeeCommandLimiter...");
+        new Metrics(this, 19135);
 
         reloadConfiguration();
         loadLimiter();

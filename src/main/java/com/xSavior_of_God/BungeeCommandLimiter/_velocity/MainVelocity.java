@@ -12,6 +12,7 @@ import com.xSavior_of_God.BungeeCommandLimiter._velocity.commands.ReloadCommand;
 import com.xSavior_of_God.BungeeCommandLimiter._velocity.events.CommandExecuteEvent;
 import com.xSavior_of_God.BungeeCommandLimiter._velocity.events.DisconnectEvent;
 import com.xSavior_of_God.BungeeCommandLimiter._velocity.events.PlayerChatEvent;
+import com.xSavior_of_God.BungeeCommandLimiter._velocity.metrics.Metrics;
 import com.xSavior_of_God.BungeeCommandLimiter.utils.Limiter;
 import net.kyori.adventure.audience.MessageType;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
@@ -44,18 +45,21 @@ public class MainVelocity {
     private final Logger logger;
     private final @DataDirectory Path dataDirectory;
 
+    private final Metrics.Factory metricsFactory;
+
     @Inject
-    public MainVelocity(ProxyServer proxy, Logger logger, @DataDirectory Path dataDirectory) {
+    public MainVelocity(ProxyServer proxy, Logger logger, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
         instance = this;
         this.proxy = proxy;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
+        this.metricsFactory = metricsFactory;
     }
 
     @Subscribe
     public void onProxyStart(ProxyInitializeEvent ignored) {
         log(Level.INFO, "&6Loading BungeeCommandLimiter (Velocity Edition)...");
-        CommandManager commandManager = proxy.getCommandManager();
+        metricsFactory.make(this, 19136);
 
         reloadConfiguration();
         loadLimiter();

@@ -1,11 +1,13 @@
 <div align=center>
 
 # Bungee Command Limiter ⏳
+for Bungeecord & Velocity
 
 ![BungeeCommandLimiter Logo](./assets/BungeeCommandLimiter.png)
 
-Prevent your server from crashing due to repeated command or message spam
+### Prevent your server from crashing due to repeated command or message spam
 </div>
+<br/>
 
 ## 🧐 Why?
 
@@ -28,6 +30,15 @@ The plugin will check if a user has sent a message or command in a short time, a
 
 - **/cbl** - Reload the plugin
 
+## ☎ Support
+
+[![support image](https://www.heroxwar.com/discordLogo.png)](https://discord.gg/5GqJbRw)
+
+**Discord:** https://discord.gg/5GqJbRw
+
+**Telegram:** https://t.me/xSavior_of_God
+
+
 ## 🛒 Download
 
-[![Spigotmc](https://static.spigotmc.org/img/spigot.png)]()          [![mc-market](https://pbs.twimg.com/profile_images/1557308606579556352/suzgxeGs_200x200.jpg)]()
+[![Spigotmc](https://static.spigotmc.org/img/spigot.png)](https://www.spigotmc.org/resources/bungeecommandlimiter.111333/)          [![mc-market](https://pbs.twimg.com/profile_images/1557308606579556352/suzgxeGs_200x200.jpg)](https://builtbybit.com/resources/bungeecommandlimiter.30295/)
