@@ -28,7 +28,7 @@ The plugin will check if a user has sent a message or command in a short time, a
 
 ## 💻 Commands
 
-- **/cbl** - Reload the plugin
+- **/bcl** - Reload the plugin
 
 ## ☎ Support
 
@@ -41,4 +41,4 @@ The plugin will check if a user has sent a message or command in a short time, a
 
 ## 🛒 Download
 
-[![Spigotmc](https://static.spigotmc.org/img/spigot.png)](https://www.spigotmc.org/resources/bungeecommandlimiter.111333/)          [![mc-market](https://pbs.twimg.com/profile_images/1557308606579556352/suzgxeGs_200x200.jpg)](https://builtbybit.com/resources/bungeecommandlimiter.30295/)
+[![Spigotmc](https://static.spigotmc.org/img/spigot.png)](https://www.spigotmc.org/resources/bungeecommandlimiter.111333/)          [![mc-market](https://pbs.twimg.com/profile_images/1557308606579556352/suzgxeGs_200x200.jpg)](https://builtbybit.com/resources/bungeecommandlimiter.30295/)          [![HangarMC](https://avatars.githubusercontent.com/u/86071345?s=200&v=4)](https://hangar.papermc.io/xSavior_of_God/BungeeCommand-Limiter)

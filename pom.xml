@@ -98,9 +98,11 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <file>${project.build.directory}/classes/plugin.yml</file>
-                    <file>${project.build.directory}/classes/bungee.yml</file>
-                    <file>${project.build.directory}/classes/velocity-plugin.json</file>
+                    <includes>
+                        <include>${project.build.directory}/classes/plugin.yml</include>
+                        <include>${project.build.directory}/classes/bungee.yml</include>
+                        <include>${project.build.directory}/classes/velocity-plugin.json</include>
+                    </includes>
                     <replacements>
                         <replacement>
                             <token>maven-version-number</token>
