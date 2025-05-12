@@ -30,6 +30,11 @@ The plugin will check if a user has sent a message or command in a short time, a
 
 - **/bcl** - Reload the plugin
 
+## 📈 Stats
+
+![stats BungeeCommandLimiter_Velocity](https://bstats.org/signatures/velocity/BungeeCommandLimiter_Velocity.svg)
+![stats BungeeCommandLimiter_Bungee](https://bstats.org/signatures/bungeecord/BungeeCommandLimiter_Bungee.svg)
+
 ## ☎ Support
 
 [![support image](https://www.heroxwar.com/discordLogo.png)](https://discord.gg/5GqJbRw)
