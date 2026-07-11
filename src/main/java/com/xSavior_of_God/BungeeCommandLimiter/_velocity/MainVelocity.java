@@ -13,10 +13,12 @@ import com.xSavior_of_God.BungeeCommandLimiter._velocity.events.DisconnectEvent;
 import com.xSavior_of_God.BungeeCommandLimiter._velocity.events.PlayerChatEvent;
 import com.xSavior_of_God.BungeeCommandLimiter._velocity.metrics.Metrics;
 import com.xSavior_of_God.BungeeCommandLimiter.utils.Limiter;
-import net.kyori.adventure.audience.MessageType;
+import net.kyori.adventure.text.logger.slf4j.ComponentLogger;
+import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.slf4j.event.Level;
 import org.slf4j.Logger;
 
 import java.io.File;
@@ -25,47 +27,46 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Level;
 
-@Plugin(
-        id = "bungeecommandlimiter",
-        name = "BungeeCommandLimiter",
-        version = "maven-version-number",
-        description = "Prevent your server from crashing due to repeated command or message spam",
-        dependencies = {},
-        authors = {"xSavior_of_God"}
-)
+
+@Plugin(id = "bungeecommandlimiter", name = "BungeeCommandLimiter", version = "maven-version-number", description = "Prevent your server from crashing due to repeated command or message spam", dependencies = {}, authors = {"xSavior_of_God"})
 public class MainVelocity {
     public static MainVelocity instance;
 
     public Limiter limiter;
     public JSONObject configuration;
     private final ProxyServer proxy;
-    private final Logger logger;
+    @Inject
+    private ComponentLogger componentLogger;
     private final @DataDirectory Path dataDirectory;
 
     private final Metrics.Factory metricsFactory;
 
     @Inject
-    public MainVelocity(ProxyServer proxy, Logger logger, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
+    public MainVelocity(ProxyServer proxy, Logger logger, ComponentLogger componentLogger, @DataDirectory Path dataDirectory, Metrics.Factory metricsFactory) {
         instance = this;
         this.proxy = proxy;
-        this.logger = logger;
         this.dataDirectory = dataDirectory;
         this.metricsFactory = metricsFactory;
     }
 
     @Subscribe
     public void onProxyStart(ProxyInitializeEvent ignored) {
-        log(Level.INFO, "&6Loading BungeeCommandLimiter (Velocity Edition)...");
+        logLegacy(Level.INFO, "&6Loading &fBungeeCommandLimiter &b&lVelocity Edition...");
         metricsFactory.make(this, 19136);
 
         reloadConfiguration();
         loadLimiter();
         loadListeners();
 
-        log(Level.INFO, "&eVersion&f "+this.proxy.getPluginManager().getPlugin("bungeecommandlimiter").get().getDescription().getVersion());
-        log(Level.INFO, "&eDeveloped by &fxSavior_of_God");
+        logLegacy(Level.INFO, "&aLoading completed successfully!");
+        this.proxy.getPluginManager()
+                .getPlugin("bungeecommandlimiter")
+                .ifPresentOrElse(plugin
+                        -> logLegacy(Level.INFO, "&fVersion &e" + plugin.getDescription().getVersion().orElse("Unknown")),
+                        () -> logLegacy(Level.INFO, "&cSomething went wrong while looking for plugin version, Plugin ID 'bungeecommandlimiter' not found!")
+        );
+        logLegacy(Level.INFO, "&f© Developed by &exSavior_of_God");
     }
 
 
@@ -79,7 +80,7 @@ public class MainVelocity {
     }
 
     public void loadLimiter() {
-        log(Level.INFO, "&6Loading Limiter with max &f" + configuration.getInt("max") + " &6commands per &f" + configuration.getInt("time") + " &6milliseconds");
+        logLegacy(Level.INFO, "&6Loading &fLimiter with &amax &f" + configuration.getInt("max") + " &acommands per &f" + configuration.getInt("time") + " &amilliseconds");
         limiter = new Limiter(configuration.getInt("max"), configuration.getInt("time"));
     }
 
@@ -109,14 +110,35 @@ public class MainVelocity {
 
 
     /**
+     * ONLY FOR LEGACY Mojang COLOR such as '&6' or '&l'
+     * Logs a message to the console
+     *
+     * @param level   The level of the message
+     * @param message The message to log
+     */
+    public static void logLegacy(Level level, String message) {
+        instance.componentLogger.atLevel(level).log(LegacyComponentSerializer.legacyAmpersand().deserialize(message));
+    }
+
+    /**
      * Logs a message to the console
      *
      * @param level   The level of the message
      * @param message The message to log
      */
     public static void log(Level level, String message) {
-        //TODO different level with colors
-        instance.proxy.sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize(message).asComponent(), MessageType.SYSTEM);
+        instance.componentLogger.atLevel(level).log(MiniMessage.miniMessage().deserialize(message));
+    }
+
+
+    /**
+     * Logs a message to the console with an exception
+     *
+     * @param level   The level of the message
+     * @param message The message to log
+     */
+    public static void log(Level level, String message, Throwable e) {
+        instance.componentLogger.atLevel(level).log(MiniMessage.miniMessage().deserialize(message), e);
     }
 
     public final InputStream getResourceAsStream(String name) {
@@ -133,7 +155,7 @@ public class MainVelocity {
             try (InputStream in = getResourceAsStream("config.json")) {
                 Files.copy(in, file.toPath());
             } catch (IOException e) {
-                e.printStackTrace();
+                log(Level.ERROR, "Failed to copy config.json", e);
             }
         }
     }

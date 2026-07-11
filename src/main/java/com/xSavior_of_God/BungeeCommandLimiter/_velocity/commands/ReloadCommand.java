@@ -8,16 +8,17 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.logging.Level;
+
+import org.slf4j.event.Level;
 
 public class ReloadCommand implements SimpleCommand {
     List<String> commands = Arrays.asList("bungeecommandlimiter", "bcl");
 
     @Override
     public void execute(Invocation sender) {
-        MainVelocity.log(Level.INFO, "&6Reloading BungeeCommandLimiter...");
+        MainVelocity.logLegacy(Level.INFO, "&6Reloading BungeeCommandLimiter...");
 
-        if(sender.source() instanceof Player)
+        if (sender.source() instanceof Player)
             sender.source().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&6Reloading BungeeCommandLimiter..."));
 
         MainVelocity.instance.unloadListeners();
@@ -28,9 +29,9 @@ public class ReloadCommand implements SimpleCommand {
         MainVelocity.instance.loadLimiter();
         MainVelocity.instance.loadListeners();
 
-        if(sender.source() instanceof Player)
+        if (sender.source() instanceof Player)
             sender.source().sendMessage(LegacyComponentSerializer.legacyAmpersand().deserialize("&aReloaded BungeeCommandLimiter!"));
-        MainVelocity.log(Level.INFO, "&aReloaded BungeeCommandLimiter!");
+        MainVelocity.logLegacy(Level.INFO, "&aReloaded BungeeCommandLimiter!");
     }
 
     @Override

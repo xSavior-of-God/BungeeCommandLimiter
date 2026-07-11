@@ -1,0 +1,12 @@
+{
+  "id": "bungeecommandlimiter",
+  "name": "BungeeCommandLimiter",
+  "version": "maven-version-number",
+  "description": "Prevent your server from crashing due to repeated command or message spam.",
+  "url": "https://herox.dev/",
+  "authors": [
+    "xSavior_of_God"
+  ],
+  "dependencies": [],
+  "main": "com.xSavior_of_God.BungeeCommandLimiter._velocity.MainVelocity"
+}

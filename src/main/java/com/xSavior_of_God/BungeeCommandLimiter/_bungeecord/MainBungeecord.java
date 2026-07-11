@@ -32,8 +32,9 @@ public class MainBungeecord extends Plugin {
         loadLimiter();
         loadListeners();
 
-        log(Level.INFO, "&eVersion &f" + this.getDescription().getVersion());
-        log(Level.INFO, "&eDeveloped by &fxSavior_of_God");
+        log(Level.INFO, "&aLoading completed successfully!");
+        log(Level.INFO, "&fVersion &e" + this.getDescription().getVersion());
+        log(Level.INFO, "&f© Developed by &exSavior_of_God");
     }
 
     public void reloadConfiguration() {
